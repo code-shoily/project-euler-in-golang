@@ -217,3 +217,50 @@ func TestCountLetters(t *testing.T) {
 		}
 	}
 }
+
+func TestGetCharNumberIgnoreCase(t *testing.T) {
+	type teststruct struct {
+		c      rune
+		output int
+	}
+
+	var testdata = []teststruct{
+		{'a', 1},
+		{'i', 9},
+		{'m', 13},
+		{'s', 19},
+		{'z', 26},
+	}
+
+	for _, tuple := range testdata {
+		v := GetCharacterNumberIgnoreCase(tuple.c)
+
+		if v != tuple.output {
+			t.Error("For", tuple.c, "Expected", tuple.output, "Got", v)
+		}
+	}
+}
+
+func TestIsTriangularNumber(t *testing.T) {
+	type teststruct struct {
+		c      int
+		output bool
+	}
+
+	var testdata = []teststruct{
+		{1, true},
+		{3, true},
+		{6, true},
+		{11, false},
+		{22, false},
+		{55, true},
+	}
+
+	for _, tuple := range testdata {
+		v := IsTriangleNumber(tuple.c)
+
+		if v != tuple.output {
+			t.Error("For", tuple.c, "Expected", tuple.output, "Got", v)
+		}
+	}
+}

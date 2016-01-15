@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Print(problems.Solution17_1())
+	fmt.Print(problems.Solution42_1())
 }

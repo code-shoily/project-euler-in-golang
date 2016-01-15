@@ -1,3 +1,5 @@
+package problems
+
 // Solution50_1 Consequetive prime sum
 func Solution50_1() (prime int) {
 	const max = 1000000
