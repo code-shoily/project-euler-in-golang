@@ -57,6 +57,8 @@ func TestDigitsOfNumber(t *testing.T) {
 
 	var testdata = []teststruct{
 		{1234567, []int{1, 2, 3, 4, 5, 6, 7}},
+		{1, []int{1}},
+		{0, []int{0}},
 	}
 
 	for _, tuple := range testdata {

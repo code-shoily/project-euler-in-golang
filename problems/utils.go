@@ -91,6 +91,9 @@ func Sum(numbers ...int) (result int) {
 
 // DigitsOfNumber returns the digits of a number in order
 func DigitsOfNumber(n int64) []int {
+	if n == 0 {
+		return []int{0}
+	}
 	limit, ctr := int(math.Log10(float64(n))), 0
 	digits := make([]int, limit+1)
 	for ctr <= limit {
@@ -210,4 +213,62 @@ func ReadLines(path string) ([]string, error) {
 		lines = append(lines, scanner.Text())
 	}
 	return lines, scanner.Err()
+}
+
+// FindLimit finds the top value of a number after which the power of `pow` of
+// its digits cannot be its equal.
+func FindLimit(pow float64) (sum int64) {
+	nines := func(n int) int64 {
+		return int64(math.Pow(float64(10), float64(n))) - 1
+	}
+	for i := 0; ; i++ {
+		nineDigits := nines(i)
+		digits := DigitsOfNumber(nineDigits)
+		for _, ii := range digits {
+			sum += int64(math.Pow(float64(ii), pow))
+		}
+		if sum < nineDigits {
+			break
+		}
+	}
+
+	return
+}
+
+// ReverseIntSlice reverses a slice FIXME INPLACE
+func ReverseIntSlice(s []int) []int {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+	return s
+}
+
+// ToBinary converts any number of base 10 into binary
+func ToBinary(n int) []int {
+	var output = make([]int, 0)
+	for {
+		if n>>1 == 0 {
+			output = append(output, 1)
+			break
+		}
+		output = append(output, n%2)
+		n = n >> 1
+	}
+
+	return ReverseIntSlice(output)
+}
+
+// IsPalindromIntSlice ...
+func IsPalindromeIntSlice(s []int) bool {
+	original := make([]int, len(s))
+	copy(original, s)
+	reversed := ReverseIntSlice(s)
+
+	for i, v := range original {
+		if v != reversed[i] {
+			return false
+		}
+	}
+
+	return true
 }
